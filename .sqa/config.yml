@@ -1,0 +1,76 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/TheIdentitySelector/thiss-mdq:
+      branch: master
+      repo: https://github.com/TheIdentitySelector/thiss-mdq.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/TheIdentitySelector/thiss-mdq git:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-silver-schnauzer.sh
+        container: qc.acc_woolly-brown-horse
+  QC.Doc:
+    repos:
+      github.com/TheIdentitySelector/thiss-mdq find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.paltry-azure-tamarin.sh
+        container: qc.doc_leaky-goldenrod-oyster
+      github.com/TheIdentitySelector/thiss-mdq git:
+        commands:
+        - /usr/bin/env sh .sqa/script.grumpy-tangerine-cow.sh
+        container: qc.doc_wiggy-turquoise-tarantula
+      github.com/TheIdentitySelector/thiss-mdq markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-periwinkle-quokka.sh
+        container: qc.doc_gimpy-khaki-opossum
+      github.com/TheIdentitySelector/thiss-mdq restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-champagne-centipede.sh
+        container: qc.doc_freaky-teal-sparrow
+  QC.Lic:
+    repos:
+      github.com/TheIdentitySelector/thiss-mdq licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-sepia-bombay.sh
+        container: qc.lic_chummy-champagne-capybara
+  QC.Sec:
+    repos:
+      github.com/TheIdentitySelector/thiss-mdq bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-alizarin-cockroach.sh
+        container: qc.sec_breezy-xanthic-gibbon
+  QC.Sty:
+    repos:
+      github.com/TheIdentitySelector/thiss-mdq flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-chartreuse-rabbit.sh
+        container: qc.sty_slaphappy-thistle-quokka
+      github.com/TheIdentitySelector/thiss-mdq hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.randy-celadon-chin.sh
+        container: qc.sty_lovely-lemon-gerbil
+      github.com/TheIdentitySelector/thiss-mdq jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-ochre-centipede.sh
+        container: qc.sty_goopy-cerise-birman
+  QC.Uni:
+    repos:
+      github.com/TheIdentitySelector/thiss-mdq tox:
+        commands:
+        - /usr/bin/env sh .sqa/script.chummy-periwinkle-terrier.sh
+        container: qc.uni_gamy-cobalt-zorse
+  QC.Ver:
+    repos:
+      github.com/TheIdentitySelector/thiss-mdq get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.pretty-pumpkin-lemming.sh
+        container: qc.ver_chummy-wheat-emu
+timeout: 5400
